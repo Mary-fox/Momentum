@@ -85,8 +85,8 @@ function setBg() {
 setBg();
 
 function getSlideNext() {
-    randomNum = randomNum + 1;
     if (randomNum === 20) randomNum = 1;
+    else randomNum = randomNum + 1;
     setBg();
 }
 
