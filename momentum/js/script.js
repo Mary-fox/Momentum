@@ -75,11 +75,11 @@ function setBg() {
     const timeOfDay = getTimeOfDay();
     const bgNum = randomNum.toString().padStart(2, "0"); //Переменная bgNum формируется на основе рандомного числа, дополняя его слева нулями, если число однозначное.
     const img = new Image();
-    img.src = `https://raw.githubusercontent.com/Mary-fox/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`
+    img.src = `https://raw.githubusercontent.com/Mary-fox/image-for-momentum/main/images/${timeOfDay}/${bgNum}.jpg`
     //Чтобы избежать моментов, когда фоновое изображение ещё не загрузилось, но уже используется как фоновое, 
     //необходимо указывать его фоном страницы только после полной загрузки. Для чего используем событие load
     img.onload = () => {      
-        body.style.backgroundImage = `url('https://raw.githubusercontent.com//Mary-fox/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg')`
+        body.style.backgroundImage = `url('https://raw.githubusercontent.com/Mary-fox/image-for-momentum/main/images/${timeOfDay}/${bgNum}.jpg')`
       }; 
 }
 setBg();
