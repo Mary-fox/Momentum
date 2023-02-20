@@ -52,6 +52,7 @@ function showGreeting() {
 
 function setLocalStorage() {
     localStorage.setItem('name', nameInput.value);
+    localStorage.setItem("city", city.value);
   }
   window.addEventListener('beforeunload', setLocalStorage)
 
@@ -59,11 +60,16 @@ function getLocalStorage() {
     if(localStorage.getItem('name')) {
         nameInput.value = localStorage.getItem('name');
     }
+    if (localStorage.getItem("city")) {
+        city.value = localStorage.getItem("city");
+      } else {
+        city.value = "Minsk";
+      }
   }
   window.addEventListener('load', getLocalStorage)
 
 
- //slider
+//slider
 let randomNum = getRandomNum();
 const slideNext = document.querySelector('.slide-next');
 const slidePrev = document.querySelector('.slide-prev');
@@ -98,3 +104,46 @@ function getSlidePrev() {
 
 slideNext.addEventListener("click", getSlideNext);
 slidePrev.addEventListener("click", getSlidePrev);
+
+
+//weather 
+const iconWeather = document.querySelector('.weather-icon');
+const temperature = document.querySelector('.temperature');
+const weatherDescription = document.querySelector('.weather-description');
+const city = document.querySelector('.city')
+const humidity = document.querySelector('.humidity');
+const wind = document.querySelector('.wind');
+const errorInWeather = document.querySelector('.weather-error');
+
+
+async function getWeather() {
+    try {
+    console.log(langSite)
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${langSite}&appid=60dad502015b535f49d009a7b52a32f4&units=metric`;
+    const res = await fetch(url);
+    const data = await res.json();
+    iconWeather.className = 'weather-icon owf';
+    iconWeather.classList.add(`owf-${data.weather[0].id}`);
+    temperature.textContent = `${Math.floor(data.main.temp)}°C`;
+    weatherDescription.textContent = data.weather[0].description;
+    errorInWeather.textContent = " ";
+    if (langSite === "en") {
+        wind.textContent = `Wind speed: ${Math.floor(data.wind.speed)} m/s`;
+        humidity.textContent = `Humidity: ${Math.floor(data.main.humidity)}%`;
+    } else if (langSite === 'ru') {
+        wind.textContent = `Скорость ветра: ${Math.floor(data.wind.speed)} м/с`;
+        humidity.textContent = `Влажность: ${Math.floor(data.main.humidity)}%`;
+    }
+  } catch(error) {
+    if (langSite === "en") {errorInWeather.textContent = `Error! City not found! `;
+    } else if (langSite === "ru") {errorInWeather.textContent = `Ошибка! Город не найден!`;}
+
+    temperature.textContent = '';
+    weatherDescription.textContent = '';
+    wind.textContent = '';
+    humidity.textContent = '';
+  }
+}
+
+  city.addEventListener("change", getWeather);
+  window.addEventListener("load", getWeather);
