@@ -9,8 +9,7 @@ let langSite = 'en';
 
 function showTime() {
     const date = new Date();
-    const currentTime = date.toLocaleTimeString();
-    time.textContent = currentTime;
+    time.textContent = date.toLocaleTimeString();
     showDate();
     showGreeting()
     setTimeout(showTime, 1000);
@@ -32,8 +31,7 @@ function showDate() {
 const nameInput = document.querySelector('.name'); 
 
 function getTimeOfDay() {
-    const date = new Date();
-    const hours = date.getHours();
+    const hours = new Date().getHours();
     if (hours > 5 && hours <12) 
     {return 'morning'} 
     if (hours > 11 && hours <18) 
@@ -46,8 +44,7 @@ function getTimeOfDay() {
 
 function showGreeting() {
     const timeOfDay = getTimeOfDay();
-    const greetingText = `Good ${timeOfDay}`;
-    greeting.textContent = greetingText;
+    greeting.textContent = `Good ${timeOfDay}`;
 }
 
 function setLocalStorage() {
@@ -118,7 +115,6 @@ const errorInWeather = document.querySelector('.weather-error');
 
 async function getWeather() {
     try {
-    console.log(langSite)
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${langSite}&appid=60dad502015b535f49d009a7b52a32f4&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
@@ -147,3 +143,26 @@ async function getWeather() {
 
   city.addEventListener("change", getWeather);
   window.addEventListener("load", getWeather);
+
+
+  //quote
+  const quote = document.querySelector(".quote");
+  const author = document.querySelector(".author");
+  const changeQuote = document.querySelector(".change-quote");
+  async function getQuotes() {  
+    const quotes = 'data/quote.json';
+    const res = await fetch(quotes);
+    const data = await res.json(); 
+    const randomQuote = Math.floor(Math.random()* (data.length - 0) + 0);
+    if (langSite === "en"){
+      quote.textContent = data[randomQuote].textEnLang;
+      author.textContent = data[randomQuote].authorEnLang;
+    } else if (langSite === "ru") {
+      quote.textContent = data[randomQuote].textRuLang;
+      author.textContent = data[randomQuote].authorRuLang;
+    }
+
+  }
+  getQuotes();
+
+  changeQuote.addEventListener("click", getQuotes)
