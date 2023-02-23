@@ -15,4 +15,5 @@ const playList = [
       duration: "01:37",
     },
   ];
+  
   export default playList;
