@@ -6,7 +6,7 @@ const playList = [
     },
     {
       title: "Linkin Park - Lost",
-      src: "ssets/sounds/Linkin Park Lost.mp3",
+      src: "assets/sounds/Linkin Park Lost.mp3",
       duration: "03:12",
     },
     {
