@@ -41,10 +41,27 @@ function getTimeOfDay() {
     if (hours >= 23 && hours <6) 
     {return "night";}
 }
+function getTimeOfDayLangRu() {
+  const hours = new Date().getHours();
+  if (hours > 5 && hours <12) 
+  {return 'Доброе утро'} 
+  if (hours > 11 && hours <18) 
+  {return "Добрый день";}
+  if (hours >= 17 && hours <24) 
+  {return "Добрый вечер";} 
+  if (hours >= 23 && hours <6) 
+  {return "Доброй ночи";}
+}
 
 function showGreeting() {
+  if (langSite === "en") {
     const timeOfDay = getTimeOfDay();
     greeting.textContent = `Good ${timeOfDay}`;
+  } else if (langSite === "ru") {
+    const timeOfDay = getTimeOfDayLangRu();
+    greeting.textContent = `${timeOfDay}`;
+  }
+
 }
 
 function setLocalStorage() {
