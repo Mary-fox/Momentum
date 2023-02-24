@@ -201,7 +201,7 @@ async function getWeather() {
   const player = document.querySelector(".player");
   const greetingContainer = document.querySelector(".greeting-container");
 
-if (localStorage.getItem('lang') === 'ru') {
+if (localStorage.getItem('lang') === 'ru' || langSite === "ru") {
   langSite = 'ru';
   nameInput.placeholder = '[Введите ваше имя]';
   changeLangRu.textContent = 'Русский';
@@ -218,7 +218,7 @@ if (localStorage.getItem('lang') === 'ru') {
   hideQuote.textContent = 'Цитата';
 };
 
-if (localStorage.getItem('lang') === 'en') {
+if (localStorage.getItem('lang') === 'en' || langSite === "en") {
   langSite = "en";
   nameInput.placeholder = '[Enter name]';
   changeLangRu.textContent = ' Russian';
