@@ -69,7 +69,8 @@ function setLocalStorage() {
     localStorage.setItem("city", city.value);
     localStorage.setItem('langSite', lang);
   }
-  window.addEventListener('unload', setLocalStorage)
+  window.addEventListener('pagehide', setLocalStorage);
+  
 
 function getLocalStorage() {
   
