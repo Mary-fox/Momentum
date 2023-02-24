@@ -11,7 +11,7 @@
 <body>
   <header class="header">
     <div class="player">
-      <audio src="" ></audio>
+      <!-- <audio src="" ></audio> -->
       <div class="player-controls">
         <button class="play-prev player-icon"></button>
         <button class="play player-icon"></button>
@@ -42,8 +42,21 @@
       <span class="greeting"></span>
       <input type="text" class="name" placeholder="[Enter name]"/>
     </div>
+    <div class="settings__wrapper">
+      <div class="settings">
+        <div class="settings__item lang-ru"></div>
+        <div class="settings__item lang-en"></div>
+        <div class="settings__item hide-time"></div>
+        <div class="settings__item hide-date"></div>
+        <div class="settings__item hide-weather"></div>
+        <div class="settings__item hide-greeting"></div>
+        <div class="settings__item hide-audio"></div>
+        <div class="settings__item hide-quote"></div>
+      </div>
+    </div>
   </main>
   <footer class="footer">
+    <div class="settings__btn"></div>
     <button class="change-quote"></button>
     <div>
       <div class="quote"></div>

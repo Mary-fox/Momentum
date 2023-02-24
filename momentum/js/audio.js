@@ -2,6 +2,7 @@ import  playList  from './playList.js';
 
 let isPlay = false;
 let playNum = 0;
+let currentTime = 0;
 
 const btnAudio = document.querySelector('.play');
 const btnNext = document.querySelector('.play-next');
@@ -21,11 +22,12 @@ function playOrStopAudio() {
     if(!isPlay){
     isPlay = true;
     audio.src = playList[playNum].src;
-    audio.currentTime = 0;
+    audio.currentTime = currentTime;
     audio.play();
     btnAudio.classList.toggle('pause');
     selectionSong()
-    }else {audio.pause();
+    }else {
+        audio.pause();
         isPlay = false;
         btnAudio.classList.toggle('pause');}
 } 
@@ -37,7 +39,7 @@ function playNext() {
     if (playNum === 2) {playNum = 0} else {
     playNum = playNum + 1}
     audio.src = playList[playNum].src;
-    audio.currentTime = 0;
+    audio.currentTime = currentTime;
     audio.play();
     isPlay = true;
     btnAudio.classList.add('pause');  
@@ -48,7 +50,7 @@ function playPrev() {
     if (playNum === 0) {playNum = 2} else {
     playNum = playNum - 1}
     audio.src = playList[playNum].src;
-    audio.currentTime = 0;
+    audio.currentTime = currentTime;
     audio.play();
     isPlay = true;
     btnAudio.classList.add('pause');  

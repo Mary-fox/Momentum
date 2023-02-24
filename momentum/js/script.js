@@ -67,21 +67,22 @@ function showGreeting() {
 function setLocalStorage() {
     localStorage.setItem('name', nameInput.value);
     localStorage.setItem("city", city.value);
+    localStorage.setItem('langSite', lang);
   }
   window.addEventListener('beforeunload', setLocalStorage)
 
 function getLocalStorage() {
+  
     if(localStorage.getItem('name')) {
         nameInput.value = localStorage.getItem('name');
     }
     if (localStorage.getItem("city")) {
         city.value = localStorage.getItem("city");
       } else {
-        city.value = "Minsk";
+          city.value = "Minsk";
       }
-  }
-  window.addEventListener('load', getLocalStorage)
-
+}
+  window.addEventListener('load', getLocalStorage);
 
 //slider
 let randomNum = getRandomNum();
@@ -183,3 +184,193 @@ async function getWeather() {
   getQuotes();
 
   changeQuote.addEventListener("click", getQuotes)
+
+
+  //settings
+  const changeLangRu = document.querySelector(".lang-ru");
+  const changeLangEn = document.querySelector(".lang-en");
+  const hideTime = document.querySelector(".hide-time");  
+  const hideDate = document.querySelector(".hide-date");
+  const hideWeather = document.querySelector(".hide-weather");
+  const hideGreeting = document.querySelector(".hide-greeting");
+  const hideAudio = document.querySelector(".hide-audio");
+  const hideQuote = document.querySelector(".hide-quote");
+  const btnSettings = document.querySelector(".settings__btn");
+  const settingsContainer = document.querySelector(".settings");
+  const weather = document.querySelector(".weather");
+  const player = document.querySelector(".player");
+  const greetingContainer = document.querySelector(".greeting-container");
+
+if (localStorage.getItem('lang') === 'ru') {
+  langSite = 'ru';
+  nameInput.placeholder = '[Введите ваше имя]';
+  changeLangRu.textContent = 'Русский';
+  changeLangEn.textContent = 'Английский';
+  // changeImgSource.textContent = 'Источник изображения';
+  // changeImgSourceGit.textContent = 'Гитхаб';
+  // changeImgSourceFlickr.textContent = 'Фликр АПИ';
+  // changeImgSourceUnsplash.textContent = 'Анслаш АПИ';
+  hideTime.textContent = 'Время';
+  hideDate.textContent = 'Дата';
+  hideWeather.textContent = 'Погода';
+  hideGreeting.textContent = 'Приветствие';
+  hideAudio.textContent = 'Плеер';
+  hideQuote.textContent = 'Цитата';
+};
+
+if (localStorage.getItem('lang') === 'en') {
+  langSite = "en";
+  nameInput.placeholder = '[Enter name]';
+  changeLangRu.textContent = ' Russian';
+  changeLangEn.textContent = 'English';
+  // changeImgSource.textContent = 'Image source';
+  // changeImgSourceGit.textContent = 'GitHub';
+  // changeImgSourceFlickr.textContent = 'Flickr API';
+  // changeImgSourceUnsplash.textContent = 'Unsplash API';
+  hideTime.textContent = 'Time';
+  hideDate.textContent = 'Date';
+  hideQuote.textContent = 'Quote';
+  hideWeather.textContent = 'Weather';
+  hideGreeting.textContent = 'Greeting';
+  hideAudio.textContent = 'Player';
+  hideQuote.textContent = 'Quote';
+}
+
+function openSettings() {
+settingsContainer.classList.toggle('open');
+}
+function changeLangRuClick(){
+  langSite = "ru";
+  nameInput.placeholder = '[Введите ваше имя]';
+  changeLangRu.textContent = 'Русский';
+  changeLangEn.textContent = 'Английский';
+  // changeImgSource.textContent = 'Источник изображения';
+  // changeImgSourceGit.textContent = 'Гитхаб';
+  // changeImgSourceFlickr.textContent = 'Фликр АПИ';
+  // changeImgSourceUnsplash.textContent = 'Анслаш АПИ';
+  hideTime.textContent = 'Время';
+  hideDate.textContent = 'Дата';
+  hideWeather.textContent = 'Погода';
+  hideGreeting.textContent = 'Приветствие';
+  hideAudio.textContent = 'Плеер';
+  hideQuote.textContent = 'Цитата';
+  showGreeting();
+  getWeather();
+  getQuotes();
+}
+function changeLangEnClick(){
+  langSite = "en";
+  nameInput.placeholder = '[Enter name]';
+  changeLangRu.textContent = ' Russian';
+  changeLangEn.textContent = 'English';
+  // changeImgSource.textContent = 'Image source';
+  // changeImgSourceGit.textContent = 'GitHub';
+  // changeImgSourceFlickr.textContent = 'Flickr API';
+  // changeImgSourceUnsplash.textContent = 'Unsplash API';
+  hideTime.textContent = 'Time';
+  hideDate.textContent = 'Date';
+  hideQuote.textContent = 'Quote';
+  hideWeather.textContent = 'Weather';
+  hideGreeting.textContent = 'Greeting';
+  hideAudio.textContent = 'Player';
+  hideQuote.textContent = 'Quote';
+  showGreeting();
+  getWeather();
+  getQuotes();
+}
+function changeHideWeather() {
+  weather.classList.toggle("hide");
+}
+function changeHideAudio() {
+  player.classList.toggle("hide");
+}
+function changeHideTime() {
+  time.classList.toggle("hide");
+}
+function changeHideDate() {
+  displayDate.classList.toggle("hide");
+}
+function changeHideGreeting() {
+  greetingContainer.classList.toggle("hide");
+}
+function changeHideQuote() {
+  quote.classList.toggle("hide");
+  author.classList.toggle("hide");
+}
+btnSettings.addEventListener("click", openSettings);
+changeLangRu.addEventListener("click", changeLangRuClick);
+changeLangEn.addEventListener("click", changeLangEnClick);
+hideWeather.addEventListener("click", changeHideWeather);
+hideAudio.addEventListener("click", changeHideAudio);
+hideTime.addEventListener("click", changeHideTime);
+hideDate.addEventListener("click", changeHideDate);
+hideGreeting.addEventListener("click", changeHideGreeting);
+hideQuote.addEventListener("click", changeHideQuote);
+
+
+
+function setLocalStorageHide() {
+  localStorage.setItem('lang', langSite);
+  if(weather.classList.contains('hide')){
+    localStorage.setItem('weather','hide');
+  }else{
+    localStorage.removeItem('weather');
+  }
+  if(displayDate.classList.contains('hide')){
+    localStorage.setItem('date','hide');
+  }else{
+    localStorage.removeItem('date');
+  }
+  if(time.classList.contains('hide')){
+    localStorage.setItem('time','hide');
+  }else{
+    localStorage.removeItem('time');
+  }
+  if(greetingContainer.classList.contains('hide')){
+    localStorage.setItem('greeting','hide');
+  }else{
+    localStorage.removeItem('greeting');
+  }
+  if(quote.classList.contains('hide')){
+    localStorage.setItem('quote','hide');
+  }else{
+    localStorage.removeItem('quote');
+  }
+  if(author.classList.contains('hide')){
+    localStorage.setItem('author','hide');
+  }else{
+    localStorage.removeItem('author');
+  }
+  if(player.classList.contains('hide')){
+    localStorage.setItem('player','hide');
+  }else{
+    localStorage.removeItem('player');} 
+};
+
+window.addEventListener('beforeunload', setLocalStorageHide);
+  
+  function getLocalStorageHide() {
+    if(localStorage.getItem('weather')) {
+      weather.classList.add(localStorage.getItem('weather'));
+    }
+    if(localStorage.getItem('date')) {
+      displayDate.classList.add(localStorage.getItem('date'));
+    }
+    if(localStorage.getItem('time')) {
+      time.classList.add(localStorage.getItem('time'));
+    }
+    if(localStorage.getItem('greeting')) {
+      greetingContainer.classList.add(localStorage.getItem('greeting'));
+    }
+    if(localStorage.getItem('quote')) {
+      quote.classList.add(localStorage.getItem('quote'));
+    }
+    if(localStorage.getItem('author')) {
+      author.classList.add(localStorage.getItem('author'));
+    }
+    if(localStorage.getItem('player')) {
+      player.classList.add(localStorage.getItem('player'));
+    }
+}
+window.addEventListener('load', getLocalStorageHide);
+
