@@ -69,7 +69,7 @@ function setLocalStorage() {
     localStorage.setItem("city", city.value);
     localStorage.setItem('langSite', lang);
   }
-  window.addEventListener('beforeunload', setLocalStorage)
+  window.addEventListener('unload', setLocalStorage)
 
 function getLocalStorage() {
   
@@ -347,7 +347,7 @@ function setLocalStorageHide() {
     localStorage.removeItem('player');} 
 };
 
-window.addEventListener('beforeunload', setLocalStorageHide);
+window.addEventListener('unload', setLocalStorageHide);
   
   function getLocalStorageHide() {
     if(localStorage.getItem('weather')) {
