@@ -347,7 +347,7 @@ function setLocalStorageHide() {
     localStorage.removeItem('player');} 
 };
 
-window.addEventListener('unload', setLocalStorageHide);
+window.addEventListener('pagehide', setLocalStorageHide);
   
   function getLocalStorageHide() {
     if(localStorage.getItem('weather')) {
