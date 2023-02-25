@@ -208,7 +208,7 @@ async function getWeather() {
 
 if (localStorage.getItem('lang') === 'ru' || langSite === "ru") {
   langSite = 'ru';
-  nameInput.placeholder = '[Введите ваше имя]';
+  nameInput.placeholder = '[Введите имя]';
   languageContainer.textContent = "Выбор языка:"
   changeLangRu.textContent = 'Русский';
   changeLangEn.textContent = 'Английский';
@@ -250,7 +250,7 @@ function closeSettings() {
 function changeLangRuClick(){
   langSite = "ru";
   if (localStorage.getItem('city') === 'Minsk' || localStorage.getItem('city') === 'Минск') city.value = 'Минск';
-  nameInput.placeholder = '[Введите ваше имя]';
+  nameInput.placeholder = '[Введите имя]';
   languageContainer.textContent = "Выбор языка:"
   changeLangRu.textContent = 'Русский';
   changeLangEn.textContent = 'Английский';
