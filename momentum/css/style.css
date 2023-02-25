@@ -374,25 +374,39 @@ body {
 .play-volume__container {
   display: flex;
 }
+.tag-open {
+  display: block;
+}
+.tag {
+  display: none;
+}
+.tag-open {
+  display: block;
+}
 @media (max-width: 768px) {
   .time {
     min-height: 80px;
     font-size: 72px;    
   }
-
+  .weather {
+    align-items: flex-end;
+  }
   .greeting-container {
     min-height: 40px;
     font-size: 32px;
     display: flex;
     flex-direction: column;
   }
-
+  .city {
+    text-align: end;
+  }
   .greeting {
     padding: 5px;
+    text-align: center;
   }
-
   .name {
     font-size: 27px;
-    padding: 5px;
+    padding: 5px; 
+    text-align: center;
   }
 }

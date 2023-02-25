@@ -118,8 +118,8 @@ function getSlidePrev() {
     setBg();
 }
 
-slideNext.addEventListener("click", getSlideNext);
-slidePrev.addEventListener("click", getSlidePrev);
+// slideNext.addEventListener("click", getSlideNext);
+// slidePrev.addEventListener("click", getSlidePrev);
 
 
 //weather 
@@ -205,6 +205,8 @@ async function getWeather() {
   const languageContainer = document.querySelector(".language");
   const overlay = document.querySelector(".setting__overlay");
   const title = document.querySelector(".settings__title");
+  const changeTitle = document.querySelector(".change__title");
+  const chooseImg = document.querySelector('.image');
 
 if (localStorage.getItem('lang') === 'ru' || langSite === "ru") {
   langSite = 'ru';
@@ -212,6 +214,8 @@ if (localStorage.getItem('lang') === 'ru' || langSite === "ru") {
   languageContainer.textContent = "Выбор языка:"
   changeLangRu.textContent = 'Русский';
   changeLangEn.textContent = 'Английский';
+  changeTitle.textContent = 'Источник изображения'
+  chooseImg.textContent = 'GitHub';
   title.textContent = "Отображение блоков:"
   hideTime.textContent = 'Время';
   hideDate.textContent = 'Дата';
@@ -227,7 +231,9 @@ if (localStorage.getItem('lang') === 'en' || langSite === "en") {
   languageContainer.textContent = "Select language:";
   changeLangRu.textContent = ' Russian';
   changeLangEn.textContent = 'English';
-  title.textContent = "Displaying blocks:"
+  changeTitle.textContent = 'Image source';
+  chooseImg.textContent = 'GitHub';
+  title.textContent = "Displaying blocks:";
   hideTime.textContent = 'Time';
   hideDate.textContent = 'Date';
   hideQuote.textContent = 'Quote';
@@ -254,7 +260,9 @@ function changeLangRuClick(){
   languageContainer.textContent = "Выбор языка:"
   changeLangRu.textContent = 'Русский';
   changeLangEn.textContent = 'Английский';
-  title.textContent = "Отображение блоков:"
+  changeTitle.textContent = 'Источник изображения';
+  chooseImg.textContent = 'GitHub';
+  title.textContent = "Отображение блоков:";
   hideTime.textContent = 'Время';
   hideDate.textContent = 'Дата';
   hideWeather.textContent = 'Погода';
@@ -272,7 +280,9 @@ function changeLangEnClick(){
   languageContainer.textContent = "Select language:";
   changeLangRu.textContent = ' Russian';
   changeLangEn.textContent = 'English';
-  title.textContent = "Displaying blocks:"
+  changeTitle.textContent = 'Image source';
+  chooseImg.textContent = 'GitHub';
+  title.textContent = "Displaying blocks:";
   hideTime.textContent = 'Time';
   hideDate.textContent = 'Date';
   hideQuote.textContent = 'Quote';
@@ -380,4 +390,105 @@ window.addEventListener('pagehide', setLocalStorageHide);
     }
 }
 window.addEventListener('load', getLocalStorageHide);
+// images API
+let tagImg = getTimeOfDay();
+const tag = document.querySelector('.tag');
 
+async function getFromUnsplash() {
+  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${tagImg}&client_id=90gm8frMiwKA3EI4YBmQ_pnp3Rh2UxAWu6CUQ1Cu3aM`
+  const res = await fetch(url);
+  const data = await res.json();
+  if (res.ok === false) {
+      getFromUnsplash();
+  }
+  const body = document.querySelector('body');
+  const img = new Image();
+  img.src = data.urls.regular;
+  img.onload = () => {
+      body.style.backgroundImage = `url(${img.src})`;
+  };
+};
+
+async function getFromFlickr() {
+  const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=9f02b5f8285d9e03f99850db62e6a532&tags=${tagImg}&extras=url_l&format=json&nojsoncallback=1`
+  const res = await fetch(url);
+  const data = await res.json();
+  if (res.ok === false) {
+      getFromFlickr();
+  }
+  const body = document.querySelector('body');
+  const img = new Image();
+  img.src = data.photos.photo[getRandomNum(0, data.photos.photo.length-1)].url_l;
+  img.onload = () => {
+      body.style.backgroundImage = `url(${img.src})`;
+  };
+};
+
+function getBg ()  {
+  if ((chooseImg.textContent === 'Flickr API')) {
+    getFromFlickr();
+    tag.classList.add('tag-open');
+  }else if (chooseImg.textContent === 'Unsplash API') {
+      getFromUnsplash();
+      tag.classList.add('tag-open');
+  } else {
+      setBg();
+      tag.classList.remove('tag-open');
+    }
+}
+getBg();
+
+function chooseInageSource() {
+  if (chooseImg.textContent === 'GitHub') {
+    chooseImg.textContent = 'Unsplash API';
+    tag.classList.add('tag-open');
+    getFromUnsplash();
+  } else if ((chooseImg.textContent === 'Unsplash API')) {
+    chooseImg.textContent = 'Flickr API'
+    tag.classList.add('tag-open');
+    getFromFlickr();
+  } else {
+    setBg();
+    chooseImg.textContent = 'GitHub';
+    tag.classList.remove('tag-open');
+  }
+}
+
+function chooseIageSlideNext() {
+  if (chooseImg.textContent === 'GitHub') {
+    getSlideNext();
+  } else if (chooseImg.textContent === 'Unsplash API') {
+    getFromUnsplash();
+  } else if (chooseImg.textContent === 'Flickr API') {
+    getFromFlickr();
+}
+}
+
+function chooseImageSlidePrev() {
+  if (chooseImg.textContent === 'GitHub') {
+    getSlidePrev();
+} else if (chooseImg.textContent === 'Unsplash API') {
+    getFromUnsplash();
+} else if (chooseImg.textContent === 'Flickr API') {
+    getFromFlickr();
+}
+}
+chooseImg.addEventListener('click', chooseInageSource);
+slideNext.addEventListener('click', chooseIageSlideNext);
+slidePrev.addEventListener('click', chooseImageSlidePrev);
+
+function changeTag() {
+  if (!!tag.value) {
+    tagImg = tag.value;
+  }
+  if (chooseImg.textContent === 'Flickr API') {
+    getFromFlickr();
+  } 
+  if (chooseImg.textContent === 'Unsplash API') {
+    getFromUnsplash();
+  }
+}
+
+tag.addEventListener('change', changeTag);
+console.log(`
+`)
