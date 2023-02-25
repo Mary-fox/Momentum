@@ -4,7 +4,6 @@ const greeting = document.querySelector('.greeting');
 const body = document.querySelector('body');
 let langSite = 'en';
 
-
 //date and time
 
 function showTime() {
@@ -80,8 +79,9 @@ function getLocalStorage() {
     if (localStorage.getItem("city")) {
         city.value = localStorage.getItem("city");
       } else {
-          city.value = "Minsk";
+        city.value = "Minsk";
       }
+    
 }
   window.addEventListener('load', getLocalStorage);
 
@@ -207,10 +207,6 @@ if (localStorage.getItem('lang') === 'ru' || langSite === "ru") {
   nameInput.placeholder = '[Введите ваше имя]';
   changeLangRu.textContent = 'Русский';
   changeLangEn.textContent = 'Английский';
-  // changeImgSource.textContent = 'Источник изображения';
-  // changeImgSourceGit.textContent = 'Гитхаб';
-  // changeImgSourceFlickr.textContent = 'Фликр АПИ';
-  // changeImgSourceUnsplash.textContent = 'Анслаш АПИ';
   hideTime.textContent = 'Время';
   hideDate.textContent = 'Дата';
   hideWeather.textContent = 'Погода';
@@ -224,10 +220,6 @@ if (localStorage.getItem('lang') === 'en' || langSite === "en") {
   nameInput.placeholder = '[Enter name]';
   changeLangRu.textContent = ' Russian';
   changeLangEn.textContent = 'English';
-  // changeImgSource.textContent = 'Image source';
-  // changeImgSourceGit.textContent = 'GitHub';
-  // changeImgSourceFlickr.textContent = 'Flickr API';
-  // changeImgSourceUnsplash.textContent = 'Unsplash API';
   hideTime.textContent = 'Time';
   hideDate.textContent = 'Date';
   hideQuote.textContent = 'Quote';
@@ -242,13 +234,10 @@ settingsContainer.classList.toggle('open');
 }
 function changeLangRuClick(){
   langSite = "ru";
+  if (localStorage.getItem('city') === 'Minsk' || localStorage.getItem('city') === 'Минск') city.value = 'Минск';
   nameInput.placeholder = '[Введите ваше имя]';
   changeLangRu.textContent = 'Русский';
   changeLangEn.textContent = 'Английский';
-  // changeImgSource.textContent = 'Источник изображения';
-  // changeImgSourceGit.textContent = 'Гитхаб';
-  // changeImgSourceFlickr.textContent = 'Фликр АПИ';
-  // changeImgSourceUnsplash.textContent = 'Анслаш АПИ';
   hideTime.textContent = 'Время';
   hideDate.textContent = 'Дата';
   hideWeather.textContent = 'Погода';
@@ -261,13 +250,10 @@ function changeLangRuClick(){
 }
 function changeLangEnClick(){
   langSite = "en";
+  if (localStorage.getItem('city') === 'Minsk' || localStorage.getItem('city') === 'Минск') city.value = 'Minsk';
   nameInput.placeholder = '[Enter name]';
   changeLangRu.textContent = ' Russian';
   changeLangEn.textContent = 'English';
-  // changeImgSource.textContent = 'Image source';
-  // changeImgSourceGit.textContent = 'GitHub';
-  // changeImgSourceFlickr.textContent = 'Flickr API';
-  // changeImgSourceUnsplash.textContent = 'Unsplash API';
   hideTime.textContent = 'Time';
   hideDate.textContent = 'Date';
   hideQuote.textContent = 'Quote';
