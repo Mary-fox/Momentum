@@ -3,6 +3,7 @@ const displayDate = document.querySelector('.date');
 const greeting = document.querySelector('.greeting');
 const body = document.querySelector('body');
 let langSite = 'en';
+const timeOfDay = getTimeOfDay();
 
 //date and time
 
@@ -391,11 +392,11 @@ window.addEventListener('pagehide', setLocalStorageHide);
 }
 window.addEventListener('load', getLocalStorageHide);
 // images API
-let tagImg = getTimeOfDay();
+let tagImg = timeOfDay;
 const tag = document.querySelector('.tag');
 
 async function getFromUnsplash() {
-  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${tagImg}&client_id=90gm8frMiwKA3EI4YBmQ_pnp3Rh2UxAWu6CUQ1Cu3aM`
+  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${tagImg}&client_id=3yGe43ESf8R0NTwvarlxAnQ9M1bMWp6Av3HbgrPuUkU`
   const res = await fetch(url);
   const data = await res.json();
   if (res.ok === false) {
@@ -440,9 +441,10 @@ getBg();
 
 function chooseInageSource() {
   if (chooseImg.textContent === 'GitHub') {
+    getFromUnsplash();
     chooseImg.textContent = 'Unsplash API';
     tag.classList.add('tag-open');
-    getFromUnsplash();
+    
   } else if ((chooseImg.textContent === 'Unsplash API')) {
     chooseImg.textContent = 'Flickr API'
     tag.classList.add('tag-open');
@@ -490,5 +492,6 @@ function changeTag() {
 }
 
 tag.addEventListener('change', changeTag);
-console.log(`
+console.log(`Сделано всё, кроме дополнительного функционала(-10баллов) и можно запустить и остановить проигрывания трека кликом по кнопке Play/Pause рядом с ним в плейлисте (-3балла)
+Итого 147баллов
 `)
