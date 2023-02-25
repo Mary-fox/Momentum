@@ -53,25 +53,45 @@
       <input type="text" class="name" placeholder="[Enter name]"/>
     </div>
     <div class="settings__wrapper">
+      <div class="setting__overlay"></div>
       <div class="settings">
-        <div class="settings__item lang-ru"></div>
-        <div class="settings__item lang-en"></div>
-        <div class="settings__item hide-time"></div>
-        <div class="settings__item hide-date"></div>
-        <div class="settings__item hide-weather"></div>
-        <div class="settings__item hide-greeting"></div>
-        <div class="settings__item hide-audio"></div>
-        <div class="settings__item hide-quote"></div>
+        <div class="settings__item language"></div>
+        <div class="settings__container">
+          <div class="settings__item lang-ru"></div>
+          <div class="settings__item lang-en"></div>
+        </div>
+        <div class="settings__item settings__title"></div>
+        <div class="settings__container">
+          <div class="settings__items">
+            <div class="settings__item hide-time"></div>
+            <div class="settings__item hide-date"></div>
+            <div class="settings__item hide-weather"></div>
+          </div>
+          <div class="settings__items">
+            <div class="settings__item hide-greeting"></div>
+            <div class="settings__item hide-audio"></div>
+            <div class="settings__item hide-quote"></div>
+        </div>
       </div>
     </div>
   </main>
   <footer class="footer">
-    <div class="settings__btn"></div>
-    <button class="change-quote"></button>
-    <div>
+    <div class="settings__btn player-icon"></div>
+    <div class="quote__container">
+      <button class="change-quote"></button>
       <div class="quote"></div>
       <div class="author"></div>
     </div>
+    <div class="footer__links">
+      <div class="footer__year">
+        <p>2023</p>
+      </div>
+      <div><a class="github" href="https://github.com/Mary-fox" target="_blank">github</a></div>
+       <div class="footer__text player-icon">
+        <a href="https://rs.school/js-stage0/" target="_blank"></a>
+      </div>
+    </div>
+    
   </footer>
   <script src="js/script.js"></script>
   <script type="module" src="js/audio.js"></script>

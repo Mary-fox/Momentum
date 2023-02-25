@@ -10,7 +10,6 @@
 }
 
 body {
-  min-width: 480px;
   min-height: 100vh;
   font-family: 'Arial', sans-serif;
   font-size: 16px;
@@ -185,7 +184,7 @@ body {
   align-items: center;
   width: 100%;
   height: 40vh;
-  min-height: 470px;  
+  min-height: 260px;  
   padding: 20px;
 }
 
@@ -262,49 +261,91 @@ body {
   background-image: url(../assets/img/setting2.png);
   width: 60px;
   height: 60px;
-  position: absolute;
   left: 10px;
   cursor: pointer;
 }
-.settings {
-  position: absolute;
-  left: -30%;
-  bottom: -12px;
-  font-size: 28px;
-  background: rgba(0,0,0,0.5);
-  width: 200px;
-  height: 300px;
-  border-radius: 35px;
+.settings__wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  opacity: 0;  
+  z-index: -1;
   transition: .5s ease-in-out;
+}
+.settings {
+    width: 500px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 45px;
+    transform: translatex(-100%);
+    transition: .5s ease-in-out;
+    z-index: 100;
+}
+.setting__overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.7);
+  opacity: 0;
+  transition: 1s ease-in-out;
+}
+.setting__overlay-open {
+  opacity: .7;
+  transition: 1s ease-in-out;
+}
+.settings__wrapper-open {
+  z-index: 100;
+    transition: .3s ease-in-out;
 }
 .open {
   opacity: 1;
-  left: 2%;
+  transform: translatex(0);
   transition: .3s ease-in-out;
 }
 .settings__item {
   cursor: pointer;
 }
-.footer {
+.settings__container {
+  display: flex;
+  gap: 95px;
+  padding: 10px 0 10px 0;
+}
+.settings__items {
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-end; */
-  align-items: center;
+  gap: 10px;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   width: 100%;
   height: 30vh;
   min-height: 160px;  
   padding: 20px;
   position: relative;
 }
-
+.footer__text {
+  background-image: url(../assets/svg/rsschool.svg);
+  width: 50px;
+  height: 50px;
+}
 .change-quote {
   margin-bottom: 30px;
   background-image: url(../assets/svg/reload.svg);  
+}
+.github {
+  text-decoration: none;
+  color: #fff;
 }
 
 .quote {
@@ -342,6 +383,8 @@ body {
   .greeting-container {
     min-height: 40px;
     font-size: 32px;
+    display: flex;
+    flex-direction: column;
   }
 
   .greeting {

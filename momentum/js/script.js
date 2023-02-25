@@ -197,16 +197,22 @@ async function getWeather() {
   const hideAudio = document.querySelector(".hide-audio");
   const hideQuote = document.querySelector(".hide-quote");
   const btnSettings = document.querySelector(".settings__btn");
-  const settingsContainer = document.querySelector(".settings");
+  const settings = document.querySelector(".settings");
+  const settingsContainer = document.querySelector(".settings__wrapper");
   const weather = document.querySelector(".weather");
   const player = document.querySelector(".player");
   const greetingContainer = document.querySelector(".greeting-container");
+  const languageContainer = document.querySelector(".language");
+  const overlay = document.querySelector(".setting__overlay");
+  const title = document.querySelector(".settings__title");
 
 if (localStorage.getItem('lang') === 'ru' || langSite === "ru") {
   langSite = 'ru';
   nameInput.placeholder = '[Введите ваше имя]';
+  languageContainer.textContent = "Выбор языка:"
   changeLangRu.textContent = 'Русский';
   changeLangEn.textContent = 'Английский';
+  title.textContent = "Отображение блоков:"
   hideTime.textContent = 'Время';
   hideDate.textContent = 'Дата';
   hideWeather.textContent = 'Погода';
@@ -218,8 +224,10 @@ if (localStorage.getItem('lang') === 'ru' || langSite === "ru") {
 if (localStorage.getItem('lang') === 'en' || langSite === "en") {
   langSite = "en";
   nameInput.placeholder = '[Enter name]';
+  languageContainer.textContent = "Select language:";
   changeLangRu.textContent = ' Russian';
   changeLangEn.textContent = 'English';
+  title.textContent = "Displaying blocks:"
   hideTime.textContent = 'Time';
   hideDate.textContent = 'Date';
   hideQuote.textContent = 'Quote';
@@ -230,14 +238,23 @@ if (localStorage.getItem('lang') === 'en' || langSite === "en") {
 }
 
 function openSettings() {
-settingsContainer.classList.toggle('open');
+settings.classList.toggle('open');
+overlay.classList.toggle('setting__overlay-open');
+settingsContainer.classList.toggle('settings__wrapper-open');
+}
+function closeSettings() {
+  settings.classList.remove('open');
+  overlay.classList.remove('setting__overlay-open');
+  settingsContainer.classList.remove('settings__wrapper-open');
 }
 function changeLangRuClick(){
   langSite = "ru";
   if (localStorage.getItem('city') === 'Minsk' || localStorage.getItem('city') === 'Минск') city.value = 'Минск';
   nameInput.placeholder = '[Введите ваше имя]';
+  languageContainer.textContent = "Выбор языка:"
   changeLangRu.textContent = 'Русский';
   changeLangEn.textContent = 'Английский';
+  title.textContent = "Отображение блоков:"
   hideTime.textContent = 'Время';
   hideDate.textContent = 'Дата';
   hideWeather.textContent = 'Погода';
@@ -252,8 +269,10 @@ function changeLangEnClick(){
   langSite = "en";
   if (localStorage.getItem('city') === 'Minsk' || localStorage.getItem('city') === 'Минск') city.value = 'Minsk';
   nameInput.placeholder = '[Enter name]';
+  languageContainer.textContent = "Select language:";
   changeLangRu.textContent = ' Russian';
   changeLangEn.textContent = 'English';
+  title.textContent = "Displaying blocks:"
   hideTime.textContent = 'Time';
   hideDate.textContent = 'Date';
   hideQuote.textContent = 'Quote';
@@ -293,6 +312,7 @@ hideTime.addEventListener("click", changeHideTime);
 hideDate.addEventListener("click", changeHideDate);
 hideGreeting.addEventListener("click", changeHideGreeting);
 hideQuote.addEventListener("click", changeHideQuote);
+overlay.addEventListener("click", closeSettings);
 
 
 
