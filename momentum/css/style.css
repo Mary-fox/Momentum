@@ -36,7 +36,7 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 120px;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .play-list {
@@ -117,7 +117,15 @@ body {
 .play-next {
   background-image: url("../assets/svg/play-next.svg");
 }
-
+.play-timer{
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-top: 3px;
+}
+.play-progress {
+  width: 100%;
+}
 .weather {
   display: flex;
   flex-direction: column;
@@ -310,7 +318,21 @@ body {
   opacity: 0;
   transition: .3s ease-in-out;
 }
-
+.play-volume {
+  background-image: url(../assets/svg/volumeplay.svg);
+}
+.off {
+  background-image: url(../assets/svg/volumeoff.svg);
+}
+.volume-progress {
+  width: 50%;
+  height: 33px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.play-volume__container {
+  display: flex;
+}
 @media (max-width: 768px) {
   .time {
     min-height: 80px;
