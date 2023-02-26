@@ -36,7 +36,7 @@ function getTimeOfDay() {
     {return 'morning'} 
     if (hours > 11 && hours <18) 
     {return "afternoon";}
-    if (hours >= 17 && hours <=24) 
+    if (hours >= 17 && hours <24) 
     {return "evening";} 
     if (hours >=0  && hours <6) 
     {return "night";}
@@ -47,7 +47,7 @@ function getTimeOfDayLangRu() {
   {return 'Доброе утро,'} 
   if (hours > 11 && hours <18) 
   {return "Добрый день,";}
-  if (hours >= 17 && hours <=24) 
+  if (hours >= 17 && hours <24) 
   {return "Добрый вечер,";} 
   if (hours >= 0 && hours <6) 
   {return "Доброй ночи,";}
