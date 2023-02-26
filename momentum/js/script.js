@@ -422,15 +422,15 @@ window.addEventListener('pagehide', setLocalStorageHide);
 }
 window.addEventListener('load', getLocalStorageHide);
 // images API
-let tagImg = timeOfDay;
+let tagForImage = timeOfDay;
 
 
 async function getFromUnsplash() {
-  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${tagImg}&client_id=3yGe43ESf8R0NTwvarlxAnQ9M1bMWp6Av3HbgrPuUkU`
+  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${tagForImage}&client_id=3yGe43ESf8R0NTwvarlxAnQ9M1bMWp6Av3HbgrPuUkU`
   const res = await fetch(url);
   const data = await res.json();
   if (res.ok === false) {
-     tagImg = timeOfDay;
+    tagForImage = timeOfDay;
       getFromUnsplash();
   }
   const body = document.querySelector('body');
@@ -442,11 +442,11 @@ async function getFromUnsplash() {
 };
 
 async function getFromFlickr() {
-  const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=9f02b5f8285d9e03f99850db62e6a532&tags=${tagImg}&extras=url_l&format=json&nojsoncallback=1`
+  const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=9f02b5f8285d9e03f99850db62e6a532&tags=${tagForImage}&extras=url_l&format=json&nojsoncallback=1`
   const res = await fetch(url);
   const data = await res.json();
   if (res.ok === false) {
-    tagImg = timeOfDay;
+    tagForImage = timeOfDay;
    
       getFromFlickr();
   }
@@ -514,7 +514,7 @@ slidePrev.addEventListener('click', chooseImageSlidePrev);
 
 function changeTag() {
   if (!!tag.value) {
-    tagImg = tag.value;
+    tagForImage = tag.value;
   }
   if (chooseImg.textContent === 'Flickr API') {
     getFromFlickr();
