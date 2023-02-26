@@ -44,13 +44,13 @@ function getTimeOfDay() {
 function getTimeOfDayLangRu() {
   const hours = new Date().getHours();
   if (hours > 5 && hours <12) 
-  {return 'Доброе утро'} 
+  {return 'Доброе утро,'} 
   if (hours > 11 && hours <18) 
-  {return "Добрый день";}
+  {return "Добрый день,";}
   if (hours >= 17 && hours <24) 
-  {return "Добрый вечер";} 
+  {return "Добрый вечер,";} 
   if (hours >= 23 && hours <6) 
-  {return "Доброй ночи";}
+  {return "Доброй ночи,";}
 }
 
 function showGreeting() {
@@ -208,7 +208,7 @@ async function getWeather() {
   const title = document.querySelector(".settings__title");
   const changeTitle = document.querySelector(".change__title");
   const chooseImg = document.querySelector('.image');
-
+  const tag = document.querySelector('.tag');
 if (localStorage.getItem('lang') === 'ru' || langSite === "ru") {
   langSite = 'ru';
   nameInput.placeholder = '[Введите имя]';
@@ -224,6 +224,7 @@ if (localStorage.getItem('lang') === 'ru' || langSite === "ru") {
   hideGreeting.textContent = 'Приветствие';
   hideAudio.textContent = 'Плеер';
   hideQuote.textContent = 'Цитата';
+  tag.placeholder =  `${timeOfDay}`;
 };
 
 if (localStorage.getItem('lang') === 'en' || langSite === "en") {
@@ -242,6 +243,7 @@ if (localStorage.getItem('lang') === 'en' || langSite === "en") {
   hideGreeting.textContent = 'Greeting';
   hideAudio.textContent = 'Player';
   hideQuote.textContent = 'Quote';
+  tag.placeholder =  `${timeOfDay}`;
 }
 
 function openSettings() {
@@ -270,6 +272,7 @@ function changeLangRuClick(){
   hideGreeting.textContent = 'Приветствие';
   hideAudio.textContent = 'Плеер';
   hideQuote.textContent = 'Цитата';
+  tag.placeholder =  `${timeOfDay}`;
   showGreeting();
   getWeather();
   getQuotes();
@@ -291,6 +294,7 @@ function changeLangEnClick(){
   hideGreeting.textContent = 'Greeting';
   hideAudio.textContent = 'Player';
   hideQuote.textContent = 'Quote';
+  tag.placeholder =  `${timeOfDay}`;
   showGreeting();
   getWeather();
   getQuotes();
@@ -362,7 +366,20 @@ function setLocalStorageHide() {
   if(player.classList.contains('hide')){
     localStorage.setItem('player','hide');
   }else{
-    localStorage.removeItem('player');} 
+    localStorage.removeItem('player');
+  } if(tag.classList.contains('tag-open')){
+    localStorage.setItem('tag',tag.placeholder);
+  }else{
+    localStorage.removeItem('tag');
+  }
+  if(tag.classList.contains('tag-open')){
+    localStorage.setItem('tag1','tag-open');
+  }else{
+    localStorage.removeItem('tag1');
+  }
+    localStorage.setItem('image',chooseImg.textContent);
+
+  
 };
 
 window.addEventListener('pagehide', setLocalStorageHide);
@@ -389,17 +406,31 @@ window.addEventListener('pagehide', setLocalStorageHide);
     if(localStorage.getItem('player')) {
       player.classList.add(localStorage.getItem('player'));
     }
+    if(localStorage.getItem('player')) {
+      player.classList.add(localStorage.getItem('player'));
+    }
+    if(localStorage.getItem('tag1')) {
+      tag.classList.add(localStorage.getItem('tag1'));
+    }
+    if(localStorage.getItem('tag')) {
+      tag.placeholder = localStorage.getItem('tag');
+    }
+    if(localStorage.getItem('image')) {
+      chooseImg.textContent = localStorage.getItem('image');
+    }
+    
 }
 window.addEventListener('load', getLocalStorageHide);
 // images API
 let tagImg = timeOfDay;
-const tag = document.querySelector('.tag');
+
 
 async function getFromUnsplash() {
   const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${tagImg}&client_id=3yGe43ESf8R0NTwvarlxAnQ9M1bMWp6Av3HbgrPuUkU`
   const res = await fetch(url);
   const data = await res.json();
   if (res.ok === false) {
+     tagImg = timeOfDay;
       getFromUnsplash();
   }
   const body = document.querySelector('body');
@@ -415,6 +446,8 @@ async function getFromFlickr() {
   const res = await fetch(url);
   const data = await res.json();
   if (res.ok === false) {
+    tagImg = timeOfDay;
+   
       getFromFlickr();
   }
   const body = document.querySelector('body');
