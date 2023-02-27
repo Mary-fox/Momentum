@@ -9,7 +9,7 @@ const timeOfDay = getTimeOfDay();
 
 function showTime() {
     const date = new Date();
-    time.textContent = date.toLocaleTimeString();
+    time.textContent = date.toLocaleTimeString('en-GB');
     showDate();
     showGreeting()
     setTimeout(showTime, 1000);
